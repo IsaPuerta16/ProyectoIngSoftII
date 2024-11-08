@@ -1,26 +1,36 @@
 package com.proyectoingsoft.demo.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
+    private String numeroDocumento;
     private String nombre;
-
-    @Column(nullable = false, unique = true)
-    private String documento;
-
     private String direccion;
     private String telefono;
-    
-    @Column(unique = true)
     private String email;
     private String ciudad;
     private String departamento;
+
+    // Constructor sin argumentos
+    public Cliente() {}
+
+    // Constructor con argumentos
+    public Cliente(String numeroDocumento, String nombre, String direccion, String telefono, String email, String ciudad, String departamento) {
+        this.numeroDocumento = numeroDocumento;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+        this.ciudad = ciudad;
+        this.departamento = departamento;
+    }
 
     // Getters y Setters
     public Long getId() {
@@ -31,20 +41,20 @@ public class Cliente {
         this.id = id;
     }
 
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
     }
 
     public String getDireccion() {
@@ -87,16 +97,18 @@ public class Cliente {
         this.departamento = departamento;
     }
 
-    // Constructor vacío y con parámetros
-    public Cliente() {}
-
-    public Cliente(String nombre, String documento, String direccion, String telefono, String email, String ciudad, String departamento) {
-        this.nombre = nombre;
-        this.documento = documento;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-        this.ciudad = ciudad;
-        this.departamento = departamento;
+    // Método toString para representación en texto
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", numeroDocumento='" + numeroDocumento + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                ", departamento='" + departamento + '\'' +
+                '}';
     }
 }

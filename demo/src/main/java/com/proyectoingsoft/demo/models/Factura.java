@@ -1,27 +1,42 @@
 package com.proyectoingsoft.demo.models;
 
-import jakarta.persistence.*;
-import java.util.List;
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Factura {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
-
-    @OneToMany
-    @JoinColumn(name = "factura_id") // Nombre de la columna en Producto que referenciará a Factura
-    private List<Producto> productos;
-
-    @Column(nullable = false)
+    private String codigo;
+    private Date fecha;
+    private Double subtotal;
+    private Double totalImpuestos;
     private Double total;
+    private String estado;
+    private Long idCliente;
+    private Long idMetodoPago;
 
-    // Getters y setters
+    // Constructor sin argumentos
+    public Factura() {}
+
+    // Constructor con argumentos
+    public Factura(String codigo, Date fecha, Double subtotal, Double totalImpuestos, Double total, String estado, Long idCliente, Long idMetodoPago) {
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.subtotal = subtotal;
+        this.totalImpuestos = totalImpuestos;
+        this.total = total;
+        this.estado = estado;
+        this.idCliente = idCliente;
+        this.idMetodoPago = idMetodoPago;
+    }
+
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -30,20 +45,36 @@ public class Factura {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public Double getTotalImpuestos() {
+        return totalImpuestos;
+    }
+
+    public void setTotalImpuestos(Double totalImpuestos) {
+        this.totalImpuestos = totalImpuestos;
     }
 
     public Double getTotal() {
@@ -52,5 +83,45 @@ public class Factura {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Long getIdMetodoPago() {
+        return idMetodoPago;
+    }
+
+    public void setIdMetodoPago(Long idMetodoPago) {
+        this.idMetodoPago = idMetodoPago;
+    }
+
+    // Método toString para representación en texto
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
+                ", fecha=" + fecha +
+                ", subtotal=" + subtotal +
+                ", totalImpuestos=" + totalImpuestos +
+                ", total=" + total +
+                ", estado='" + estado + '\'' +
+                ", idCliente=" + idCliente +
+                ", idMetodoPago=" + idMetodoPago +
+                '}';
     }
 }

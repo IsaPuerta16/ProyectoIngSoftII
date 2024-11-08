@@ -1,34 +1,34 @@
 package com.proyectoingsoft.demo.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class DetalleFactura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Integer cantidad;
+    private Double valorTotal;
+    private Double descuento;
+    private Long idProducto;
+    private Long idFactura;
 
-    @ManyToOne
-    @JoinColumn(name = "producto_id", nullable = false)
-    private Producto producto;
-
-    @Column(nullable = false)
-    private int cantidad;
-
-    @Column(nullable = false)
-    private double precio;
-
-    // Constructor vacío
+    // Constructor sin argumentos
     public DetalleFactura() {}
 
-    // Constructor con parámetros
-    public DetalleFactura(Producto producto, int cantidad, double precio) {
-        this.producto = producto;
+    // Constructor con argumentos
+    public DetalleFactura(Integer cantidad, Double valorTotal, Double descuento, Long idProducto, Long idFactura) {
         this.cantidad = cantidad;
-        this.precio = precio;
+        this.valorTotal = valorTotal;
+        this.descuento = descuento;
+        this.idProducto = idProducto;
+        this.idFactura = idFactura;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -37,27 +37,56 @@ public class DetalleFactura {
         this.id = id;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
-        return precio;
+    public Double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
+    }
+
+    public Long getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public Long getIdFactura() {
+        return idFactura;
+    }
+
+    public void setIdFactura(Long idFactura) {
+        this.idFactura = idFactura;
+    }
+
+    // Método toString para representación en texto
+    @Override
+    public String toString() {
+        return "DetalleFactura{" +
+                "id=" + id +
+                ", cantidad=" + cantidad +
+                ", valorTotal=" + valorTotal +
+                ", descuento=" + descuento +
+                ", idProducto=" + idProducto +
+                ", idFactura=" + idFactura +
+                '}';
     }
 }

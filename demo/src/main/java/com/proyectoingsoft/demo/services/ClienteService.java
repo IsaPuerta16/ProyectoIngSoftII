@@ -6,27 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClienteService {
-
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente> obtenerTodosLosClientes() {
+    public List<Cliente> getAllClientes() {
         return clienteRepository.findAll();
     }
 
-    public Optional<Cliente> obtenerClientePorId(Long id) {
-        return clienteRepository.findById(id);
+    public Cliente getClienteById(Long id) {
+        return clienteRepository.findById(id).orElse(null);
     }
 
-    public Cliente guardarCliente(Cliente cliente) {
+    public Cliente createCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
-    public void eliminarCliente(Long id) {
+    public Cliente updateCliente(Long id, Cliente clienteDetails) {
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
+        if (cliente != null) {
+            cliente.setNumeroDocumento(clienteDetails.getNumeroDocumento());
+            cliente.setNombre(clienteDetails.getNombre());
+            cliente.setDireccion(clienteDetails.getDireccion());
+            cliente.setTelefono(clienteDetails.getTelefono());
+            cliente.setEmail(clienteDetails.getEmail());
+            cliente.setCiudad(clienteDetails.getCiudad());
+            cliente.setDepartamento(clienteDetails.getDepartamento());
+            return clienteRepository.save(cliente);
+        }
+        return null;
+    }
+
+    public void deleteCliente(Long id) {
         clienteRepository.deleteById(id);
     }
 }
